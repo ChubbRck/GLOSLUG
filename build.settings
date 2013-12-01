@@ -1,0 +1,30 @@
+settings =
+{
+        orientation =
+        {
+                default = "landscapeLeft",
+                
+                supported =
+                {
+                         "landscapeRight", "landscapeLeft"
+                },
+        },
+        iphone =
+        {
+                components = {},
+                plist =
+                {                              
+                        CFBundleDisplayName = "Igloo DLX",  
+                        --CFBundleIdentifier = "com.appledts.GKTapper",  -- temporary line for testing!
+                        UIAppFonts = 
+                        {
+                                "ArcadeClassic.ttf"
+                        },
+                        CFBundleIconFile = "Icon.png",
+                        CFBundleIconFiles = {
+                        "Icon.png" ,  
+                        "Icon-72.png"             
+                        },
+                },
+        },
+}
