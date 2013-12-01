@@ -193,6 +193,13 @@ function calculateShade()
     end
 end
 
+local function saveAndSignOff() -- change this to take an argument
+
+    local signOffTime = os.time();
+    preference.save{lastVisit=signOffTime}
+    preference.save{traits=theCreature.traits}
+end
+
 local function loadAndRecalculateState()
     calculateShade(); 
 
@@ -443,6 +450,7 @@ local function updatePeriodically()
 
             -- health is an average of all the 'traits'
             local tot = 0;
+
             theCreature.tempTraits = {(100 -theCreature.hunger), theCreature.happiness, theCreature.alertness, theCreature.weight, theCreature.strength}
             for i=1,#theCreature.tempTraits do
                 local trait = theCreature.tempTraits[i];
@@ -453,6 +461,10 @@ local function updatePeriodically()
             --print("average is now " .. average)
             theCreature.health = average;
 
+            -- save traits to disk
+            theCreature.traits = {(theCreature.hunger), theCreature.happiness, theCreature.alertness, theCreature.weight, theCreature.strength}
+            saveAndSignOff();
+         
         end
         
     end
@@ -651,12 +663,6 @@ local function memCheck()
     -- print(system.getInfo( "textureMemoryUse" ))
 end
 
-local function saveAndSignOff()
-
-    local signOffTime = os.time();
-    preference.save{lastVisit=signOffTime}
-    preference.save{traits=theCreature.traits}
-end
 
 
 
